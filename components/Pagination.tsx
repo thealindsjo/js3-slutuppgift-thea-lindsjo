@@ -5,7 +5,6 @@ interface Props {
   page: number;
   totalPages: number;
   basePath?: string;
-  // om onPageChange skickas används knappar istället för länkar (klient-uppdatering)
   onPageChange?: (p: number) => void;
 }
 
@@ -39,7 +38,6 @@ export default function Pagination({ page, totalPages, basePath = "/countries", 
     );
   }
 
-  // fallback: server-side links (behöver basePath)
   return (
     <div className="flex justify-center items-center gap-4 mt-6">
       <Link
