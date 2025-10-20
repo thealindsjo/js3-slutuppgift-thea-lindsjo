@@ -1,7 +1,9 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    domains: ["upload.wikimedia.org", "flagcdn.com", "restcountries.com"],
+    // alternativt remotePatterns kan användas för mer flexibilitet
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
