@@ -1,6 +1,7 @@
+
 export async function fetchCountries() {
   const res = await fetch(
-    "https://restcountries.com/v3.1/all?fields=name,region,capital,flags,cca2,cca3"
+    "https://restcountries.com/v3.1/all?fields=name,region,capital,flags,cca2,cca3,latlng,capitalInfo"
   );
 
   if (!res.ok) {

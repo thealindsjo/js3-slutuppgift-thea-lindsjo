@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function CountryCard({ country }: { country: any }) {
   return (
     <li className="border rounded-lg p-4">
-      <Link href={`/info/${country.cca3}`} className="block">
+      <Link href={`/country/${country.cca3}`} className="block">
         <div className="mb-2 w-16 h-10 relative">
           <Image
             src={country.flags.png}

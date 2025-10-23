@@ -1,16 +1,37 @@
-
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import CountrySearch from "./CountrySearch";
 import CountriesList from "./CountryList";
 import Pagination from "./Pagination";
 
-export default function CountriesContainer({ initialCountries }: { initialCountries: any[] }) {
-  const [query, setQuery] = useState("");
-  const [region, setRegion] = useState("All");
-  const [page, setPage] = useState(1);
-  const pageSize = 10;
-  
+interface Props {
+  initialCountries: any[];
+  pageSize?: number;
+}
+
+export default function CountriesContainer({ initialCountries, pageSize = 10 }: Props) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const initialQuery = (searchParams.get("q") ?? "").trim();
+  const initialRegion = (searchParams.get("region") ?? "All") || "All";
+  const initialPage = Number(searchParams.get("page") ?? "1") || 1;
+
+  const [query, setQuery] = useState(initialQuery);
+  const [region, setRegion] = useState(initialRegion);
+  const [page, setPage] = useState(initialPage);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (query.length > 100) {
+      setError("Söksträngen får högst vara 100 tecken.");
+    } else {
+      setError(null);
+    }
+  }, [query]);
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return initialCountries.filter((c: any) => {
@@ -30,6 +51,20 @@ export default function CountriesContainer({ initialCountries }: { initialCountr
     if (page > totalPages) setPage(totalPages);
   }, [page, totalPages]);
 
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (query) params.set("q", query);
+    if (region && region !== "All") params.set("region", region);
+    if (page && page > 1) params.set("page", String(page));
+
+    const newQs = params.toString();
+    if (newQs !== (searchParams.toString() || "")) {
+      const url = newQs ? `${pathname}?${newQs}` : pathname;
+      router.replace(url);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, region, page, router, pathname]);
+
   const start = (page - 1) * pageSize;
   const current = filtered.slice(start, start + pageSize);
 
@@ -37,9 +72,16 @@ export default function CountriesContainer({ initialCountries }: { initialCountr
     <main>
       <CountrySearch query={query} onChange={setQuery} region={region} onRegionChange={setRegion} />
 
-      <CountriesList countries={current} />
+      {error && <div className="text-sm text-red-600 mb-2">{error}</div>}
 
-      <Pagination page={page} totalPages={totalPages} onPageChange={(p) => setPage(p)} />
+      {filtered.length === 0 ? (
+        <div className="mt-4 text-center text-gray-700">Inga länder matchar dina kriterier</div>
+      ) : (
+        <>
+          <CountriesList countries={current} />
+          <Pagination page={page} totalPages={totalPages} onPageChange={(p) => setPage(p)} />
+        </>
+      )}
     </main>
   );
 }
