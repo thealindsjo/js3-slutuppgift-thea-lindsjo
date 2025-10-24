@@ -3,21 +3,34 @@ import Link from "next/link";
 
 export default function CountryCard({ country }: { country: any }) {
   return (
-    <li className="border rounded-lg p-4">
+    <li className="border rounded-lg p-4 hover:shadow transition-shadow bg-white">
       <Link href={`/country/${country.cca3}`} className="block">
-        <div className="mb-2 w-16 h-10 relative">
-          <Image
-            src={country.flags.png}
-            alt={`Flag of ${country.name.common}`}
-            width={64}
-            height={40}
-            className="object-contain"
-          />
-        </div>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+          <div className="w-full sm:w-20 h-12 flex-shrink-0 relative">
+            <Image
+              src={country.flags.png}
+              alt={`Flag of ${country.name.common}`}
+              width={64}
+              height={40}
+              className="object-contain w-full h-full"
+            />
+          </div>
 
-        <h2 className="font-semibold">{country.name.common}</h2>
-        <p>Region: {country.region}</p>
-        {country.capital && <p>Capital: {country.capital[0]}</p>}
+          <div className="flex-1">
+            <h2 className="font-semibold text-lg">{country.name.common}</h2>
+            {country.name?.official && (
+              <div className="text-sm text-gray-600 hidden sm:block">{country.name.official}</div>
+            )}
+            <p className="text-sm text-gray-700 mt-1">
+              <span className="font-medium">Region:</span> {country.region}
+            </p>
+            {country.capital && (
+              <p className="text-sm text-gray-700">
+                <span className="font-medium">Capital:</span> {country.capital[0]}
+              </p>
+            )}
+          </div>
+        </div>
       </Link>
     </li>
   );

@@ -9,8 +9,7 @@ export default function CountryFacts({ country, wbPopulation }: { country: any; 
   return (
     <section aria-labelledby="facts-heading" className="bg-white p-4 rounded shadow-sm">
       <h2 id="facts-heading" className="text-xl font-semibold mb-2">Fakta</h2>
-
-      <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+      <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm">
         <div>
           <dt className="font-medium">Region</dt>
           <dd>{country.region ?? "—"}</dd>
