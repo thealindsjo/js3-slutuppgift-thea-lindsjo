@@ -10,7 +10,7 @@ interface Props {
   pageSize?: number;
 }
 
-export default function CountriesContainer({ initialCountries, pageSize = 10 }: Props) {
+export default function CountriesContainer({ initialCountries, pageSize = 12 }: Props) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();

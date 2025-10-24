@@ -9,7 +9,6 @@ export default function ImageGallery({ images, fallbackName }: { images: any[]; 
     );
   }
 
-  // visa upp till 6 bilder, minst 3 om möjligt
   const show = images.slice(0, 6);
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">

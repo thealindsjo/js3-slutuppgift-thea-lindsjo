@@ -1,7 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Spinner from "./Spinner";
 import { fetchWeatherByCoords, getCoordsFromCountry } from "@/lib/weather";
+import { Spinner } from "./ui/spinner";
+import { Button } from "./ui/button";
 
 export default function WeatherCard({
   lat,
@@ -10,13 +11,13 @@ export default function WeatherCard({
 }: {
   lat?: number;
   lon?: number;
-  country?: any;
+  country?: string;
 }) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const load = async (useLat?: number, useLon?: number, useCountry?: any) => {
+  const load = async (useLat?: number, useLon?: number, useCountry?: string) => {
     setLoading(true);
     setError(null);
     try {
@@ -31,8 +32,8 @@ export default function WeatherCard({
         throw new Error("Ingen position angiven");
       }
       setData(result);
-    } catch (e: any) {
-      setError(e?.message ?? "Kunde inte hämta väder.");
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Kunde inte hämta väder.");
     } finally {
       setLoading(false);
     }
@@ -50,18 +51,19 @@ export default function WeatherCard({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lat, lon, country]);
 
-  if (loading) return <Spinner />;
+  if (loading) return <Spinner/>;
 
   if (error)
     return (
       <div className="p-3 border rounded">
         <p className="text-sm text-red-600">{error}</p>
-        <button
+        <Button
           className="mt-2 px-3 py-1 bg-sky-600 text-white rounded"
           onClick={() => load(lat, lon, country)}
+          aria-label="Försök igen"
         >
           Försök igen
-        </button>
+        </Button>
       </div>
     );
 

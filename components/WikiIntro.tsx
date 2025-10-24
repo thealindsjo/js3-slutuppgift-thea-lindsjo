@@ -1,6 +1,15 @@
 import React from "react";
 
-export default function WikiIntro({ wiki, name }: { wiki: any | null; name: string }) {
+interface WikiData {
+  extract: string | null;
+  content_urls?: {
+    desktop?: {
+      page: string;
+    };
+  };
+}
+
+export default function WikiIntro({ wiki, name }: { wiki: WikiData | null; name: string }) {
   if (!wiki || wiki.extract == null) {
     return (
       <div>
