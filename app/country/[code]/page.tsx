@@ -5,10 +5,10 @@ import ImageGallery from "@/components/ImageGallery";
 import WikiIntro from "@/components/WikiIntro";
 import WeatherCard from "@/components/WeatherCard";
 import ErrorRetry from "@/components/ErrorRetry";
-import { getCountryByCode, getCountryByName } from "@/lib/country";
-import { getWikiSummary } from "@/lib/wiki";
-import { getUnsplashImages } from "@/lib/unsplash";
-import { getWorldBankPopulation } from "@/lib/worldbank";
+import { getCountryByCode, getCountryByName } from "@/api/country";
+import { getWikiSummary } from "@/api/wiki";
+import { getUnsplashImages } from "@/api/unsplash";
+import { getWorldBankPopulation } from "@/api/worldbank";
 
 type Props = { params: { code: string } };
 
@@ -35,7 +35,9 @@ export default async function Page({ params }: Props) {
 
     const wiki = await getWikiSummary(country.name.common);
     const images = await getUnsplashImages(country.name.common, 8);
-    const wbPopulation = country.cca2 ? await getWorldBankPopulation(country.cca2) : null;
+    const wbPopulation = country.cca2
+      ? await getWorldBankPopulation(country.cca2)
+      : null;
 
     const latlng =
       country.capitalInfo?.latlng && country.capitalInfo.latlng.length === 2
@@ -43,10 +45,15 @@ export default async function Page({ params }: Props) {
         : country.latlng ?? null;
 
     return (
-      <main className="p-8" aria-labelledby="country-heading">
-                <header className="mb-6">
-          <Link href="/countries" className="text-sm underline">← Tillbaka</Link>
-          <h1 id="country-heading" className="text-3xl font-bold mt-3 flex items-center gap-4">
+      <>
+        <section className="mb-6">
+          <Link href="/countries" className="text-sm underline">
+            ← Tillbaka
+          </Link>
+          <h1
+            id="country-heading"
+            className="text-3xl font-bold mt-3 flex items-center gap-4"
+          >
             <span className="inline-block w-12 h-8">
               <Image
                 src={country.flags?.png || country.flags?.svg}
@@ -57,15 +64,22 @@ export default async function Page({ params }: Props) {
               />
             </span>
             {country.name.common}
-            {country.name.official && <span className="text-sm font-light ml-2">({country.name.official})</span>}
+            {country.name.official && (
+              <span className="text-sm font-light ml-2">
+                ({country.name.official})
+              </span>
+            )}
           </h1>
-        </header>
+        </section>
 
-        <section aria-labelledby="facts-heading" className="grid gap-6 md:grid-cols-3">
+        <section
+          aria-labelledby="facts-heading"
+          className="grid gap-6 md:grid-cols-3"
+        >
           <aside className="md:col-span-1">
             <div className="sticky top-8">
               <CountryFacts country={country} wbPopulation={wbPopulation} />
-              <h2 className="text-xl font-semibold mb-2">Väder</h2>
+              <h2 className="text-xl font-semibold mt-3">Väder</h2>
               {latlng ? (
                 <WeatherCard country={country} />
               ) : (
@@ -82,19 +96,21 @@ export default async function Page({ params }: Props) {
 
             <div className="mt-6">
               <h2 className="text-xl font-semibold mb-2">Bilder</h2>
-              <ImageGallery images={images} fallbackName={country.name.common} />
+              <ImageGallery
+                images={images}
+                fallbackName={country.name.common}
+              />
             </div>
           </div>
-
         </section>
-      </main>
+      </>
     );
   } catch (e) {
     return (
-      <main className="p-8">
+      <>
         <h1 className="text-2xl font-bold mb-4">Fel</h1>
         <ErrorRetry message="Kunde inte ladda landets data. Försök igen." />
-      </main>
+      </>
     );
   }
 }

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
+import SignIn from "./SignIn";
 
 export default function Navbar() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -26,19 +27,20 @@ export default function Navbar() {
             <Link href="/" className="text-lg font-bold" aria-label="Gå till startsidan">
               CountriesApp
             </Link>
-            
+
                 <Link href="/countries" role="menuitem" className="px-2 py-1 text-sm hover:underline">
                   Länder
                 </Link>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="hidden sm:block text-sm text-gray-600" aria-hidden="true">
+            {/* <span className="hidden sm:block text-sm text-gray-600" aria-hidden="true">
               {loggedIn ? "Inloggad" : "Inte inloggad"}
             </span>
             <Button onClick={toggleAuth} aria-label={loggedIn ? "Logga ut" : "Logga in"}>
               {loggedIn ? "Logga ut" : "Logga in"}
-            </Button>
+            </Button> */}
+            {/* <SignIn /> */}
           </div>
         </div>
       </div>

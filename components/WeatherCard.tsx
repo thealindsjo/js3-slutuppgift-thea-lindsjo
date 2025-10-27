@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { fetchWeatherByCoords, getCoordsFromCountry } from "@/lib/weather";
+import { fetchWeatherByCoords, getCoordsFromCountry } from "@/api/weather";
 import { Spinner } from "./ui/spinner";
 import { Button } from "./ui/button";
 
@@ -17,7 +17,11 @@ export default function WeatherCard({
   const [data, setData] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const load = async (useLat?: number, useLon?: number, useCountry?: string) => {
+  const load = async (
+    useLat?: number,
+    useLon?: number,
+    useCountry?: string
+  ) => {
     setLoading(true);
     setError(null);
     try {
@@ -51,7 +55,7 @@ export default function WeatherCard({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lat, lon, country]);
 
-  if (loading) return <Spinner/>;
+  if (loading) return <Spinner />;
 
   if (error)
     return (
@@ -71,17 +75,16 @@ export default function WeatherCard({
 
   const current = data.current_weather;
   const daily = data.daily;
-  const pos = (() => {
-    if (country) {
-      const c = getCoordsFromCountry(country);
-      return c ? `${c.lat.toFixed(3)}, ${c.lon.toFixed(3)}` : "";
-    }
-    return `${(lat ?? 0).toFixed(3)}, ${(lon ?? 0).toFixed(3)}`;
-  })();
+  // const pos = (() => {
+  //   if (country) {
+  //     const c = getCoordsFromCountry(country);
+  //     return c ? `${c.lat.toFixed(3)}, ${c.lon.toFixed(3)}` : "";
+  //   }
+  //   return `${(lat ?? 0).toFixed(3)}, ${(lon ?? 0).toFixed(3)}`;
+  // })();
 
   return (
     <div className="p-3 border rounded" aria-live="polite">
-      <div className="text-sm">Position: {pos}</div>
       <div className="mt-2">
         <div className="text-lg font-semibold">
           {current?.temperature ?? "—"}°C

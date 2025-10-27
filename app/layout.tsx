@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ReactNode } from "react";
 import Navbar from "@/components/Navbar";
+import SignIn from "@/components/SignIn";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <div className="min-h-screen">
           <header className="bg-white border-b">
             <Navbar />
+            <SignIn />
           </header>
           <main className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-6">
             {children}
