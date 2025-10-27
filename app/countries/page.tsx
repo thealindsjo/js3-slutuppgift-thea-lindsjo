@@ -1,13 +1,18 @@
 import { fetchCountries } from "@/api/fetchCountries";
 import CountriesContainer from "@/components/CountriesContainer";
-import SignIn from "@/components/SignIn";
+import LoginAlert from "@/components/LoginAlert";
+import { Suspense } from "react";
 
 export default async function CountriesPage() {
   const allCountries = await fetchCountries();
 
   return (
     <>
-    <CountriesContainer initialCountries={allCountries} />;
+    <Suspense fallback={null}>
+        <LoginAlert />
+      </Suspense>
+
+    <CountriesContainer initialCountries={allCountries} />
     </>
   )
 }
