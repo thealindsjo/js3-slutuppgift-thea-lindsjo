@@ -1,3 +1,11 @@
+/**
+ * ErrorBoundary Component
+ *
+ * React error boundary that catches JavaScript errors in component tree.
+ * Provides fallback UI with error message and retry functionality.
+ * Prevents entire app crashes by containing errors to specific components.
+ */
+
 "use client";
 
 import React, { Component, ErrorInfo, ReactNode } from "react";

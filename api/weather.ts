@@ -1,3 +1,10 @@
+/**
+ * Weather API Functions
+ *
+ * Integrates with Open-Meteo API to fetch weather data for specific coordinates.
+ * Provides current weather information and helper functions for coordinate extraction.
+ * Includes error handling and data transformation for weather display.
+ */
 import { Country } from "@/types/country";
 import { WeatherData } from "@/types/weather";
 

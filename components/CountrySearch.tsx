@@ -1,3 +1,11 @@
+/**
+ * CountrySearch Component
+ *
+ * Provides search input and region filter functionality for the countries list.
+ * Includes real-time search, region selection buttons, and clear functionality.
+ * Features hover effects and loading states for better user experience.
+ */
+
 "use client";
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";

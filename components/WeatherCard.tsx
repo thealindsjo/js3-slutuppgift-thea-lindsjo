@@ -1,3 +1,11 @@
+/**
+ * WeatherCard Component
+ *
+ * Displays current weather information for a country or specific coordinates.
+ * Fetches data from Open-Meteo API and shows temperature, humidity, wind speed, and direction.
+ * Includes loading states, error handling, and retry functionality.
+ */
+
 "use client";
 import React, { useEffect, useState } from "react";
 import { fetchWeatherByCoords, getCoordsFromCountry } from "@/api/weather";

@@ -1,3 +1,11 @@
+/**
+ * Root Layout Component
+ *
+ * Main layout wrapper for the entire application. Includes global error boundary,
+ * authentication provider, navigation header, and global styling.
+ * Defines app metadata and provides consistent structure across all pages.
+ */
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { ReactNode } from "react";

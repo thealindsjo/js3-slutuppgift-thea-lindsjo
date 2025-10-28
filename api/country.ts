@@ -1,3 +1,11 @@
+/**
+ * Country API Functions
+ *
+ * Handles fetching country data from REST Countries API.
+ * Provides functions to get country by code, name, or fetch all countries.
+ * Includes caching with Next.js revalidation for optimal performance.
+ */
+
 import { Country } from "@/types/country";
 
 export async function getCountryByCode(code: string): Promise<Country> {

@@ -1,3 +1,11 @@
+/**
+ * CountriesContainer Component
+ *
+ * Main container for the countries list page. Handles search functionality,
+ * region filtering, pagination, and URL parameter synchronization.
+ * Manages client-side state while preserving search parameters in the URL.
+ */
+
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";

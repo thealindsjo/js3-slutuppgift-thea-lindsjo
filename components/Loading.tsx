@@ -1,3 +1,11 @@
+/**
+ * Loading Component
+ *
+ * Reusable loading indicator with customizable message, size, and layout options.
+ * Supports different sizes (sm, md, lg) and can be displayed as full-screen overlay.
+ * Provides consistent loading states across the application.
+ */
+
 import { Spinner } from "@/components/ui/spinner";
 
 interface LoadingProps {

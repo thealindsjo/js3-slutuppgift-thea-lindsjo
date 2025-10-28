@@ -1,3 +1,11 @@
+/**
+ * AuthButton Component
+ *
+ * Handles user authentication using NextAuth.js with Google OAuth.
+ * Displays sign in/sign out buttons with loading states and user information.
+ * Manages authentication state and provides visual feedback during auth processes.
+ */
+
 "use client";
 
 import { useSession, signIn, signOut } from "next-auth/react";

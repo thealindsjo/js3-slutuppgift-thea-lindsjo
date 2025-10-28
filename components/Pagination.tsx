@@ -1,3 +1,11 @@
+/**
+ * Pagination Component
+ *
+ * Provides navigation controls for paginated content with Previous/Next buttons.
+ * Displays current page information and handles page transitions with loading states.
+ * Includes disabled states for boundary pages and hover effects for better UX.
+ */
+
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Spinner } from "./ui/spinner";

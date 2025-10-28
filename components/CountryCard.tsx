@@ -1,3 +1,11 @@
+/**
+ * CountryCard Component
+ *
+ * Displays a single country in a card format with flag, name, region, and capital.
+ * Clickable card that navigates to the detailed country page.
+ * Responsive design with hover effects for better user interaction.
+ */
+
 import Image from "next/image";
 import Link from "next/link";
 import { Country } from "@/types/country";

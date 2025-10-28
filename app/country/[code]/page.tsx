@@ -1,3 +1,11 @@
+/**
+ * Country Detail Page
+ *
+ * Dynamic route page displaying detailed information about a specific country.
+ * Fetches and displays country facts, weather data, Wikipedia intro, and images.
+ * Includes error boundaries for each section and comprehensive error handling.
+ */
+
 import Image from "next/image";
 import Link from "next/link";
 import CountryFacts from "@/components/CountryFacts";
