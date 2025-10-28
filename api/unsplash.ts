@@ -4,7 +4,7 @@ export async function getUnsplashImages(
   query: string,
   per_page = 8
 ): Promise<UnsplashImage[]> {
-  const key = process.env.UNSPLASH_KEY;
+  const key = process.env.UNSPLASH_ACCESS_KEY;
   if (!key) return [];
 
   try {
