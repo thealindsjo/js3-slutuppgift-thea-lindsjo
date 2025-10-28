@@ -9,7 +9,7 @@ export default async function CountriesPage() {
 
   return (
     <>
-      <Suspense fallback={<Loading message="Laddar länder..." />}>
+      <Suspense fallback={<Loading message="Loading countries..." />}>
         <LoginAlert />
       </Suspense>
 

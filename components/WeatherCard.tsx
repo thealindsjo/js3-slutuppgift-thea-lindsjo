@@ -39,7 +39,9 @@ export default function WeatherCard({
       }
       setData(result);
     } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : "Kunde inte hämta väder.");
+      setError(
+        e instanceof Error ? e.message : "Could not fetch weather data."
+      );
     } finally {
       setLoading(false);
     }
@@ -51,12 +53,12 @@ export default function WeatherCard({
     } else if (typeof lat === "number" && typeof lon === "number") {
       load(lat, lon, undefined);
     } else {
-      setError("Ingen position angiven för väder.");
+      setError("No location provided for weather data.");
       setLoading(false);
     }
   }, [lat, lon, country]);
 
-  if (loading) return <Loading message="Hämtar väderdata..." size="sm" />;
+  if (loading) return <Loading message="Loading weather data..." size="sm" />;
 
   if (error)
     return (
@@ -65,9 +67,9 @@ export default function WeatherCard({
         <Button
           className="mt-2 px-3 py-1 bg-sky-600 text-white rounded"
           onClick={() => load(lat, lon, country)}
-          aria-label="Försök igen"
+          aria-label="Try again"
         >
-          Försök igen
+          Try again
         </Button>
       </div>
     );
@@ -76,13 +78,6 @@ export default function WeatherCard({
 
   const current = data.current_weather;
   const daily = data.daily;
-  // const pos = (() => {
-  //   if (country) {
-  //     const c = getCoordsFromCountry(country);
-  //     return c ? `${c.lat.toFixed(3)}, ${c.lon.toFixed(3)}` : "";
-  //   }
-  //   return `${(lat ?? 0).toFixed(3)}, ${(lon ?? 0).toFixed(3)}`;
-  // })();
 
   return (
     <div className="p-3 border rounded" aria-live="polite">
@@ -90,13 +85,13 @@ export default function WeatherCard({
         <div className="text-lg font-semibold">
           {current?.temperature ?? "—"}°C
         </div>
-        <div className="text-sm">Vind: {current?.windspeed ?? "—"} m/s</div>
+        <div className="text-sm">Wind: {current?.windspeed ?? "—"} m/s</div>
       </div>
 
       {daily && (
         <div className="mt-3 text-sm">
-          <div>Max idag: {daily.temperature_2m_max?.[0]}°C</div>
-          <div>Min idag: {daily.temperature_2m_min?.[0]}°C</div>
+          <div>Max today: {daily.temperature_2m_max?.[0]}°C</div>
+          <div>Min today: {daily.temperature_2m_min?.[0]}°C</div>
         </div>
       )}
     </div>

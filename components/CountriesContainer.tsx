@@ -31,7 +31,7 @@ export default function CountriesContainer({
 
   useEffect(() => {
     if (query.length > 100) {
-      setError("Söksträngen får högst vara 100 tecken.");
+      setError("Search string can be at most 100 characters.");
     } else {
       setError(null);
     }
@@ -87,7 +87,7 @@ export default function CountriesContainer({
 
       {filtered.length === 0 ? (
         <div className="mt-4 text-center text-gray-700">
-          Inga länder matchar dina kriterier
+          No countries match your criteria
         </div>
       ) : (
         <>

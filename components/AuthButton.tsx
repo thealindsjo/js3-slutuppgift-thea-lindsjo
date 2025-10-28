@@ -29,7 +29,7 @@ export default function AuthButton() {
   if (status === "loading") {
     return (
       <Button disabled className="px-3 py-1">
-        Laddar...
+        Loading...
       </Button>
     );
   }
@@ -44,9 +44,9 @@ export default function AuthButton() {
           onClick={handleSignOut}
           disabled={loading}
           className="px-3 py-1"
-          aria-label="Logga ut"
+          aria-label="Sign out"
         >
-          {loading ? "Loggar ut..." : "Logga ut"}
+          {loading ? "Signing out..." : "Sign out"}
         </Button>
       </div>
     );
@@ -57,9 +57,9 @@ export default function AuthButton() {
       onClick={handleSignIn}
       disabled={loading}
       className="px-3 py-1"
-      aria-label="Logga in med Google"
+      aria-label="Sign in with Google"
     >
-      {loading ? "Loggar in..." : "Logga in"}
+      {loading ? "Signing in..." : "Sign in"}
     </Button>
   );
 }

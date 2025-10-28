@@ -44,17 +44,17 @@ export default function CountrySearch({
           <Input
             value={query}
             onChange={(e) => onChange(e.target.value)}
-            placeholder="Sök land..."
+            placeholder="Search country..."
             maxLength={100}
-            aria-label="Sök land"
+            aria-label="Search country"
             autoComplete="off"
           />
           <Button
             onClick={handleClear}
-            aria-label="Rensa sök"
+            aria-label="Clear search"
             disabled={isClearing}
           >
-            {isClearing ? <Spinner /> : "Rensa"}
+            {isClearing ? <Spinner /> : "Clear"}
           </Button>
         </div>
 

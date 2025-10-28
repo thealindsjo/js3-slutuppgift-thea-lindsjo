@@ -7,12 +7,12 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export const metadata: Metadata = {
   title: "Countries App",
-  description: "En reseapp som visar information om länder",
+  description: "A travel app that shows information about countries",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="sv">
+    <html lang="en">
       <body>
         <div className="min-h-screen">
           <ClientProvider>

@@ -6,7 +6,7 @@ export async function fetchCountries(): Promise<Country[]> {
   );
 
   if (!res.ok) {
-    throw new Error("Kunde inte hämta länder");
+    throw new Error("Could not fetch countries");
   }
 
   const data = await res.json();

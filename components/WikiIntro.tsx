@@ -11,7 +11,7 @@ export default function WikiIntro({
   if (!wiki || wiki.extract == null) {
     return (
       <div>
-        <p>Ingen introduktion tillgänglig från Wikipedia.</p>
+        <p>No introduction available from Wikipedia.</p>
       </div>
     );
   }
@@ -24,7 +24,7 @@ export default function WikiIntro({
       <p>{wiki.extract}</p>
       {wiki.content_urls?.desktop?.page && (
         <p className="text-sm">
-          Källa:{" "}
+          Source:{" "}
           <a
             href={wiki.content_urls.desktop.page}
             target="_blank"

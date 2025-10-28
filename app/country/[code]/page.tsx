@@ -11,15 +11,15 @@ import { getWikiSummary } from "@/api/wiki";
 import { getUnsplashImages } from "@/api/unsplash";
 import { getWorldBankPopulation } from "@/api/worldbank";
 
-type Props = { params: { code: string } };
+type Props = { params: Promise<{ code: string }> };
 
 export default async function Page({ params }: Props) {
-  const id = params.code;
-  if (!id) {
+  const { code } = await params;
+  if (!code) {
     return (
       <main className="p-8">
-        <h1 className="text-2xl font-bold mb-4">Land</h1>
-        <div>Inget land angivet</div>
+        <h1 className="text-2xl font-bold mb-4">Country</h1>
+        <div>No country specified</div>
       </main>
     );
   }
@@ -27,12 +27,12 @@ export default async function Page({ params }: Props) {
   try {
     let country = null;
     try {
-      country = await getCountryByCode(id);
+      country = await getCountryByCode(code);
     } catch {
-      country = await getCountryByName(id);
+      country = await getCountryByName(code);
     }
 
-    if (!country) throw new Error("Kunde inte hitta landet");
+    if (!country) throw new Error("Could not find the country");
 
     const wiki = await getWikiSummary(country.name.common);
     const images = await getUnsplashImages(country.name.common, 8);
@@ -49,7 +49,7 @@ export default async function Page({ params }: Props) {
       <>
         <section className="mb-6">
           <Link href="/countries" className="text-sm underline">
-            ← Tillbaka
+            ← Back
           </Link>
           <h1
             id="country-heading"
@@ -80,12 +80,12 @@ export default async function Page({ params }: Props) {
           <aside className="md:col-span-1">
             <div className="sticky top-8">
               <CountryFacts country={country} wbPopulation={wbPopulation} />
-              <h2 className="text-xl font-semibold mt-3">Väder</h2>
+              <h2 className="text-xl font-semibold mt-3">Weather</h2>
               <ErrorBoundary>
                 {latlng ? (
                   <WeatherCard country={country} />
                 ) : (
-                  <div>Inga koordinater tillgängliga för att visa väder.</div>
+                  <div>No coordinates available to show weather.</div>
                 )}
               </ErrorBoundary>
             </div>
@@ -93,14 +93,14 @@ export default async function Page({ params }: Props) {
 
           <div className="md:col-span-2">
             <div className="mt-6">
-              <h2 className="text-xl font-semibold mb-2">Intro</h2>
+              <h2 className="text-xl font-semibold mb-2">Introduction</h2>
               <ErrorBoundary>
                 <WikiIntro wiki={wiki} name={country.name.common} />
               </ErrorBoundary>
             </div>
 
             <div className="mt-6">
-              <h2 className="text-xl font-semibold mb-2">Bilder</h2>
+              <h2 className="text-xl font-semibold mb-2">Images</h2>
               <ErrorBoundary>
                 <ImageGallery
                   images={images}
@@ -115,8 +115,8 @@ export default async function Page({ params }: Props) {
   } catch {
     return (
       <>
-        <h1 className="text-2xl font-bold mb-4">Fel</h1>
-        <ErrorRetry message="Kunde inte ladda landets data. Försök igen." />
+        <h1 className="text-2xl font-bold mb-4">Error</h1>
+        <ErrorRetry message="Could not load country data. Please try again." />
       </>
     );
   }

@@ -7,7 +7,7 @@ interface LoadingProps {
 }
 
 export function Loading({
-  message = "Laddar...",
+  message = "Loading...",
   size = "md",
   fullScreen = false,
 }: LoadingProps) {

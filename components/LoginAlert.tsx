@@ -23,30 +23,36 @@ export default function LoginAlert() {
     const url = new URL(window.location.href);
     url.searchParams.delete("loginRequired");
     url.searchParams.delete("attempted");
-    router.replace(url.pathname + (url.searchParams.toString() ? `?${url.searchParams.toString()}` : ""));
+    router.replace(
+      url.pathname +
+        (url.searchParams.toString() ? `?${url.searchParams.toString()}` : "")
+    );
   };
 
   if (!show) return null;
 
   return (
-    <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg" role="alert">
+    <div
+      className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg"
+      role="alert"
+    >
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <h3 className="text-lg font-medium text-yellow-800 mb-2">
-            Inloggning krävs
+            Login required
           </h3>
           <p className="text-yellow-700 mb-3">
-            Du måste logga in för att visa detaljerad information om länder.
+            You need to sign in to view detailed information about countries.
           </p>
           <div className="flex gap-2">
             <AuthButton />
-            <Button 
-              onClick={handleClose} 
-              variant="outline" 
+            <Button
+              onClick={handleClose}
+              variant="outline"
               size="sm"
               className="text-yellow-800 border-yellow-300"
             >
-              Stäng
+              Close
             </Button>
           </div>
         </div>

@@ -30,9 +30,9 @@ export default function Pagination({ page, totalPages, onPageChange }: Props) {
           className={`px-3 py-1 border rounded ${
             page <= 1 ? "opacity-50" : ""
           }`}
-          aria-label="Gå till föregående sida"
+          aria-label="Go to the previous page"
         >
-          {loading && page > 1 ? <Spinner /> : "Föregående sida"}
+          {loading && page > 1 ? <Spinner /> : "Previous page"}
         </Button>
 
         <span>
@@ -45,9 +45,9 @@ export default function Pagination({ page, totalPages, onPageChange }: Props) {
           className={`px-3 py-1 border rounded ${
             page >= totalPages ? "opacity-50" : ""
           }`}
-          aria-label="Gå till nästa sida"
+          aria-label="Go to the next page"
         >
-          {loading && page < totalPages ? <Spinner /> : "Nästa sida"}
+          {loading && page < totalPages ? <Spinner /> : "Next page"}
         </Button>
       </div>
     );

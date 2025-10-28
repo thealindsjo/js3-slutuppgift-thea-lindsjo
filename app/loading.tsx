@@ -1,4 +1,4 @@
-import {Spinner} from "@/components/ui/spinner";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function Loading() {
   return (
@@ -9,7 +9,7 @@ export default function Loading() {
     >
       <div className="flex flex-col items-center gap-3">
         <Spinner />
-        <span className="text-sm text-gray-700">Laddar…</span>
+        <span className="text-sm text-gray-700">Loading…</span>
       </div>
     </main>
   );

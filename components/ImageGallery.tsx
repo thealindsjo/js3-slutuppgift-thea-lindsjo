@@ -11,9 +11,7 @@ export default function ImageGallery({
   if (!images || images.length === 0) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        <div className="p-4 border rounded">
-          Inga bilder från Unsplash hittades.
-        </div>
+        <div className="p-4 border rounded">No images found from Unsplash.</div>
       </div>
     );
   }

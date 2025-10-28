@@ -1,7 +1,6 @@
 "use client";
 
 import React, { Component, ErrorInfo, ReactNode } from "react";
-import { Button } from "@/components/ui/button";
 
 interface Props {
   children: ReactNode;
@@ -26,6 +25,10 @@ export class ErrorBoundary extends Component<Props, State> {
     console.error("Uncaught error:", error, errorInfo);
   }
 
+  private handleRetry = () => {
+    this.setState({ hasError: false, error: undefined });
+  };
+
   public render() {
     if (this.state.hasError) {
       if (this.props.fallback) {
@@ -37,18 +40,18 @@ export class ErrorBoundary extends Component<Props, State> {
           className="p-6 border rounded-lg bg-red-50 border-red-200"
           role="alert"
         >
-          <h2 className="text-lg font-semibold text-red-800 mb-2">
-            Något gick fel
+          <h2 className="text-lg font-semibold text-red-600 mb-2">
+            Something went wrong
           </h2>
-          <p className="text-red-700 mb-4">
-            {this.state.error?.message || "Ett oväntat fel inträffade"}
+          <p className="text-gray-700 mb-4">
+            {this.state.error?.message || "An unexpected error occurred"}
           </p>
-          <Button
-            onClick={() => this.setState({ hasError: false, error: undefined })}
-            className="bg-red-600 hover:bg-red-700"
+          <button
+            onClick={this.handleRetry}
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
           >
-            Försök igen
-          </Button>
+            Try again
+          </button>
         </div>
       );
     }

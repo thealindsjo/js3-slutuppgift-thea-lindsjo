@@ -7,7 +7,7 @@ export async function getCountryByCode(code: string): Promise<Country> {
     )}?fields=name,flags,region,subregion,capital,population,languages,currencies,capitalInfo,cca2,cca3,latlng`,
     { next: { revalidate: 120 } }
   );
-  if (!res.ok) throw new Error("Kunde inte hämta landet");
+  if (!res.ok) throw new Error("Could not fetch country");
   const data = await res.json();
   return Array.isArray(data) ? data[0] : data;
 }
@@ -19,7 +19,7 @@ export async function getCountryByName(name: string): Promise<Country> {
     )}?fullText=true&fields=name,flags,region,subregion,capital,population,languages,currencies,capitalInfo,cca2,cca3,latlng`,
     { next: { revalidate: 120 } }
   );
-  if (!res.ok) throw new Error("Kunde inte hämta landet");
+  if (!res.ok) throw new Error("Could not fetch country");
   const data = await res.json();
   return Array.isArray(data) ? data[0] : data;
 }
@@ -29,7 +29,7 @@ export async function getAllCountries(): Promise<Country[]> {
     "https://restcountries.com/v3.1/all?fields=name,region,capital,flags,cca2,cca3,latlng,capitalInfo",
     { next: { revalidate: 3600 } }
   );
-  if (!res.ok) throw new Error("Kunde inte hämta länder");
+  if (!res.ok) throw new Error("Could not fetch countries");
   const data = await res.json();
   return data.sort((a: Country, b: Country) =>
     a.name.common.localeCompare(b.name.common)
