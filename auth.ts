@@ -11,4 +11,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
     signIn: "/auth/signin",
   },
+  callbacks: {
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const isOnCountryPage = nextUrl.pathname.startsWith("/country/");
+
+      if (isOnCountryPage) {
+        if (isLoggedIn) return true;
+        return false; 
+      }
+
+      return true;
+    },
+  },
 });
