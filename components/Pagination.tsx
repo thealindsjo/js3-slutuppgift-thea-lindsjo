@@ -27,7 +27,7 @@ export default function Pagination({ page, totalPages, onPageChange }: Props) {
         <Button
           onClick={() => handleClick(prev)}
           disabled={page <= 1 || loading}
-          className={`px-3 py-1 border rounded ${
+          className={`px-3 py-1 border rounded bg-gray-800 text-white hover:bg-gray-600 hover:text-white transition-colors cursor-pointer ${
             page <= 1 ? "opacity-50" : ""
           }`}
           aria-label="Go to the previous page"
@@ -42,7 +42,7 @@ export default function Pagination({ page, totalPages, onPageChange }: Props) {
         <Button
           onClick={() => handleClick(next)}
           disabled={page >= totalPages || loading}
-          className={`px-3 py-1 border rounded ${
+          className={`px-3 py-1 border rounded bg-gray-800 text-white hover:bg-gray-600 hover:text-white transition-colors cursor-pointer ${
             page >= totalPages ? "opacity-50" : ""
           }`}
           aria-label="Go to the next page"

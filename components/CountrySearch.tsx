@@ -53,6 +53,7 @@ export default function CountrySearch({
             onClick={handleClear}
             aria-label="Clear search"
             disabled={isClearing}
+            className="bg-gray-800 text-white hover:bg-gray-600 hover:text-white transition-colors cursor-pointer"
           >
             {isClearing ? <Spinner /> : "Clear"}
           </Button>
@@ -65,10 +66,10 @@ export default function CountrySearch({
               <Button
                 key={r}
                 onClick={() => onRegionChange(r)}
-                className={`text-sm px-3 py-1 rounded ${
+                className={`text-sm px-3 py-1 rounded transition-colors cursor-pointer ${
                   selected
-                    ? "bg-sky-600 text-white"
-                    : "bg-gray-100 text-gray-700"
+                    ? "bg-sky-600 text-white hover:bg-sky-700 hover:text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-800"
                 }`}
                 aria-label={r}
                 role="tab"

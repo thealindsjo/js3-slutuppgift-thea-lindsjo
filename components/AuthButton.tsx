@@ -38,12 +38,12 @@ export default function AuthButton() {
     return (
       <div className="flex items-center gap-3">
         <span className="hidden sm:block text-sm text-gray-600">
-          Hej, {session.user?.name || session.user?.email}
+          Hello, {session.user?.name || session.user?.email}
         </span>
         <Button
           onClick={handleSignOut}
           disabled={loading}
-          className="px-3 py-1"
+          className="px-3 py-1 bg-gray-800 text-white hover:bg-gray-600 hover:text-white transition-colors cursor-pointer"
           aria-label="Sign out"
         >
           {loading ? "Signing out..." : "Sign out"}
@@ -56,7 +56,7 @@ export default function AuthButton() {
     <Button
       onClick={handleSignIn}
       disabled={loading}
-      className="px-3 py-1"
+      className="px-3 py-1 bg-gray-800 text-white hover:bg-gray-600 hover:text-white transition-colors cursor-pointer"
       aria-label="Sign in with Google"
     >
       {loading ? "Signing in..." : "Sign in"}
