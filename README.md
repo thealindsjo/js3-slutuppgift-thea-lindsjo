@@ -103,9 +103,12 @@ A modern app about countries built with Next.js that provides comprehensive info
    Create a `.env.local` file in the root directory:
 
    ```env
+   NEXTAUTH_URL=your-auth-url
+   NEXTAUTH_SECRET=your-auth-secret
+
    AUTH_GOOGLE_ID=your-auth-google-id
    AUTH_GOOGLE_SECRET=your-auth-google-secret
-   AUTH_SECRET=your-auth-secret
+   
    UNSPLASH_ACCESS_KEY=your-unsplash-access-key
    ```
 
