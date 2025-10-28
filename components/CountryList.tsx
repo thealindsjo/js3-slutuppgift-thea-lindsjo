@@ -1,14 +1,5 @@
 import CountryCard from "./CountryCard";
-
-interface Country {
-  cca3: string;
-  name: {
-    common: string;
-  };
-  flags: {
-    png: string;
-  };
-}
+import { Country } from "@/types/country";
 
 export default function CountriesList({ countries }: { countries: Country[] }) {
   return (

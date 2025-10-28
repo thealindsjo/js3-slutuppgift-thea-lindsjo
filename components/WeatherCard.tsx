@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { fetchWeatherByCoords, getCoordsFromCountry } from "@/api/weather";
 import { Spinner } from "./ui/spinner";
 import { Button } from "./ui/button";
+import { Country } from "@/types/country";
+import { WeatherData } from "@/types/weather";
 
 export default function WeatherCard({
   lat,
@@ -11,16 +13,16 @@ export default function WeatherCard({
 }: {
   lat?: number;
   lon?: number;
-  country?: string;
+  country?: Country;
 }) {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<any | null>(null);
+  const [data, setData] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const load = async (
     useLat?: number,
     useLon?: number,
-    useCountry?: string
+    useCountry?: Country
   ) => {
     setLoading(true);
     setError(null);
@@ -52,7 +54,6 @@ export default function WeatherCard({
       setError("Ingen position angiven för väder.");
       setLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lat, lon, country]);
 
   if (loading) return <Spinner />;

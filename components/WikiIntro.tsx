@@ -1,15 +1,13 @@
 import React from "react";
+import { WikiData } from "@/types/wiki";
 
-interface WikiData {
-  extract: string | null;
-  content_urls?: {
-    desktop?: {
-      page: string;
-    };
-  };
-}
-
-export default function WikiIntro({ wiki, name }: { wiki: WikiData | null; name: string }) {
+export default function WikiIntro({
+  wiki,
+  name,
+}: {
+  wiki: WikiData | null;
+  name: string;
+}) {
   if (!wiki || wiki.extract == null) {
     return (
       <div>
@@ -19,12 +17,19 @@ export default function WikiIntro({ wiki, name }: { wiki: WikiData | null; name:
   }
 
   return (
-    <article aria-label={`Wikipedia introduction for ${name}`} className="prose max-w-none">
+    <article
+      aria-label={`Wikipedia introduction for ${name}`}
+      className="prose max-w-none"
+    >
       <p>{wiki.extract}</p>
       {wiki.content_urls?.desktop?.page && (
         <p className="text-sm">
           Källa:{" "}
-          <a href={wiki.content_urls.desktop.page} target="_blank" rel="noreferrer">
+          <a
+            href={wiki.content_urls.desktop.page}
+            target="_blank"
+            rel="noreferrer"
+          >
             Wikipedia
           </a>
         </p>

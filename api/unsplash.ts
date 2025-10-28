@@ -1,6 +1,9 @@
-type UnsplashImage = { id: string; url: string; alt: string };
+import { UnsplashImage } from "@/types";
 
-export async function getUnsplashImages(query: string, per_page = 8): Promise<UnsplashImage[]> {
+export async function getUnsplashImages(
+  query: string,
+  per_page = 8
+): Promise<UnsplashImage[]> {
   const key = process.env.UNSPLASH_KEY;
   if (!key) return [];
   try {
@@ -11,11 +14,19 @@ export async function getUnsplashImages(query: string, per_page = 8): Promise<Un
     );
     if (!res.ok) return [];
     const json = await res.json();
-    return (json.results || []).slice(0, per_page).map((it: any) => ({
-      id: it.id,
-      url: it.urls?.regular,
-      alt: it.alt_description || query,
-    }));
+    return (json.results || [])
+      .slice(0, per_page)
+      .map(
+        (it: {
+          id: string;
+          urls?: { regular: string };
+          alt_description?: string;
+        }) => ({
+          id: it.id,
+          url: it.urls?.regular || "",
+          alt: it.alt_description || query,
+        })
+      );
   } catch {
     return [];
   }

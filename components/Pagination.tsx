@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Spinner } from "./ui/spinner";
@@ -10,7 +9,7 @@ interface Props {
   onPageChange?: (p: number) => void;
 }
 
-export default function Pagination({ page, totalPages, basePath = "/countries", onPageChange }: Props) {
+export default function Pagination({ page, totalPages, onPageChange }: Props) {
   const [loading, setLoading] = useState(false);
   const prev = page - 1;
   const next = page + 1;
@@ -28,7 +27,9 @@ export default function Pagination({ page, totalPages, basePath = "/countries", 
         <Button
           onClick={() => handleClick(prev)}
           disabled={page <= 1 || loading}
-          className={`px-3 py-1 border rounded ${page <= 1 ? "opacity-50" : ""}`}
+          className={`px-3 py-1 border rounded ${
+            page <= 1 ? "opacity-50" : ""
+          }`}
           aria-label="Gå till föregående sida"
         >
           {loading && page > 1 ? <Spinner /> : "Föregående sida"}
@@ -41,7 +42,9 @@ export default function Pagination({ page, totalPages, basePath = "/countries", 
         <Button
           onClick={() => handleClick(next)}
           disabled={page >= totalPages || loading}
-          className={`px-3 py-1 border rounded ${page >= totalPages ? "opacity-50" : ""}`}
+          className={`px-3 py-1 border rounded ${
+            page >= totalPages ? "opacity-50" : ""
+          }`}
           aria-label="Gå till nästa sida"
         >
           {loading && page < totalPages ? <Spinner /> : "Nästa sida"}

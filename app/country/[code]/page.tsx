@@ -105,7 +105,7 @@ export default async function Page({ params }: Props) {
         </section>
       </>
     );
-  } catch (e) {
+  } catch {
     return (
       <>
         <h1 className="text-2xl font-bold mb-4">Fel</h1>

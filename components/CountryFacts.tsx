@@ -1,14 +1,30 @@
 import React from "react";
+import { Country } from "@/types/country";
 
-export default function CountryFacts({ country, wbPopulation }: { country: any; wbPopulation?: number | null }) {
-  const languages = country.languages ? Object.values(country.languages).join(", ") : "—";
+export default function CountryFacts({
+  country,
+  wbPopulation,
+}: {
+  country: Country;
+  wbPopulation?: number | null;
+}) {
+  const languages = country.languages
+    ? Object.values(country.languages).join(", ")
+    : "—";
   const currencies = country.currencies
-    ? Object.values(country.currencies).map((c: any) => `${c.name} (${c.symbol ?? ""})`).join(", ")
+    ? Object.values(country.currencies)
+        .map((c) => `${c.name} (${c.symbol ?? ""})`)
+        .join(", ")
     : "—";
 
   return (
-    <section aria-labelledby="facts-heading" className="bg-white p-4 rounded shadow-sm">
-      <h2 id="facts-heading" className="text-xl font-semibold mb-2">Fakta</h2>
+    <section
+      aria-labelledby="facts-heading"
+      className="bg-white p-4 rounded shadow-sm"
+    >
+      <h2 id="facts-heading" className="text-xl font-semibold mb-2">
+        Fakta
+      </h2>
       <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm">
         <div>
           <dt className="font-medium">Region</dt>
@@ -26,7 +42,11 @@ export default function CountryFacts({ country, wbPopulation }: { country: any; 
 
         <div>
           <dt className="font-medium">Befolkning</dt>
-          <dd>{(country.population || wbPopulation) ? (country.population ?? wbPopulation).toLocaleString() : "—"}</dd>
+          <dd>
+            {country.population || wbPopulation
+              ? (country.population ?? wbPopulation)!.toLocaleString()
+              : "—"}
+          </dd>
         </div>
 
         <div>

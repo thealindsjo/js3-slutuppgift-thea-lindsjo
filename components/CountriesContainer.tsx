@@ -4,13 +4,17 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import CountrySearch from "./CountrySearch";
 import CountriesList from "./CountryList";
 import Pagination from "./Pagination";
+import { Country } from "@/types/country";
 
 interface Props {
-  initialCountries: any[];
+  initialCountries: Country[];
   pageSize?: number;
 }
 
-export default function CountriesContainer({ initialCountries, pageSize = 12 }: Props) {
+export default function CountriesContainer({
+  initialCountries,
+  pageSize = 12,
+}: Props) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -34,9 +38,10 @@ export default function CountriesContainer({ initialCountries, pageSize = 12 }: 
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return initialCountries.filter((c: any) => {
+    return initialCountries.filter((c: Country) => {
       const matchesQuery = !q || c.name.common.toLowerCase().includes(q);
-      const matchesRegion = region === "All" || !region ? true : c.region === region;
+      const matchesRegion =
+        region === "All" || !region ? true : c.region === region;
       return matchesQuery && matchesRegion;
     });
   }, [initialCountries, query, region]);
@@ -70,16 +75,27 @@ export default function CountriesContainer({ initialCountries, pageSize = 12 }: 
 
   return (
     <main>
-      <CountrySearch query={query} onChange={setQuery} region={region} onRegionChange={setRegion} />
+      <CountrySearch
+        query={query}
+        onChange={setQuery}
+        region={region}
+        onRegionChange={setRegion}
+      />
 
       {error && <div className="text-sm text-red-600 mb-2">{error}</div>}
 
       {filtered.length === 0 ? (
-        <div className="mt-4 text-center text-gray-700">Inga länder matchar dina kriterier</div>
+        <div className="mt-4 text-center text-gray-700">
+          Inga länder matchar dina kriterier
+        </div>
       ) : (
         <>
           <CountriesList countries={current} />
-          <Pagination page={page} totalPages={totalPages} onPageChange={(p) => setPage(p)} />
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            onPageChange={(p) => setPage(p)}
+          />
         </>
       )}
     </main>
