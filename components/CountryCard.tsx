@@ -4,7 +4,7 @@ import { Country } from "@/types/country";
 
 export default function CountryCard({ country }: { country: Country }) {
   return (
-    <li className="border rounded-lg p-4 hover:shadow transition-shadow bg-white">
+    <li className="border rounded-lg p-4 hover:shadow-lg transition-shadow bg-white cursor-pointer">
       <Link href={`/country/${country.cca3}`} className="block">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           <div className="w-full sm:w-20 h-12 shrink-0 relative">

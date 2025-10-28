@@ -87,7 +87,7 @@ export default function CountriesContainer({
 
       {filtered.length === 0 ? (
         <div className="mt-4 text-center text-gray-700">
-          No countries match your criteria
+          No countries match your search
         </div>
       ) : (
         <>

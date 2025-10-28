@@ -1,7 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["upload.wikimedia.org", "flagcdn.com", "restcountries.com", "images.unsplash.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+      },
+      {
+        protocol: "https",
+        hostname: "flagcdn.com",
+      },
+      {
+        protocol: "https",
+        hostname: "restcountries.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+    ],
   },
 };
 
