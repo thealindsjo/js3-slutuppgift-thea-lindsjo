@@ -5,6 +5,7 @@ import ImageGallery from "@/components/ImageGallery";
 import WikiIntro from "@/components/WikiIntro";
 import WeatherCard from "@/components/WeatherCard";
 import ErrorRetry from "@/components/ErrorRetry";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { getCountryByCode, getCountryByName } from "@/api/country";
 import { getWikiSummary } from "@/api/wiki";
 import { getUnsplashImages } from "@/api/unsplash";
@@ -80,26 +81,32 @@ export default async function Page({ params }: Props) {
             <div className="sticky top-8">
               <CountryFacts country={country} wbPopulation={wbPopulation} />
               <h2 className="text-xl font-semibold mt-3">Väder</h2>
-              {latlng ? (
-                <WeatherCard country={country} />
-              ) : (
-                <div>Inga koordinater tillgängliga för att visa väder.</div>
-              )}
+              <ErrorBoundary>
+                {latlng ? (
+                  <WeatherCard country={country} />
+                ) : (
+                  <div>Inga koordinater tillgängliga för att visa väder.</div>
+                )}
+              </ErrorBoundary>
             </div>
           </aside>
 
           <div className="md:col-span-2">
             <div className="mt-6">
               <h2 className="text-xl font-semibold mb-2">Intro</h2>
-              <WikiIntro wiki={wiki} name={country.name.common} />
+              <ErrorBoundary>
+                <WikiIntro wiki={wiki} name={country.name.common} />
+              </ErrorBoundary>
             </div>
 
             <div className="mt-6">
               <h2 className="text-xl font-semibold mb-2">Bilder</h2>
-              <ImageGallery
-                images={images}
-                fallbackName={country.name.common}
-              />
+              <ErrorBoundary>
+                <ImageGallery
+                  images={images}
+                  fallbackName={country.name.common}
+                />
+              </ErrorBoundary>
             </div>
           </div>
         </section>

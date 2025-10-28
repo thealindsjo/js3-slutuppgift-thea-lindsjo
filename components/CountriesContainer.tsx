@@ -5,6 +5,7 @@ import CountrySearch from "./CountrySearch";
 import CountriesList from "./CountryList";
 import Pagination from "./Pagination";
 import { Country } from "@/types/country";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 interface Props {
   initialCountries: Country[];
@@ -90,7 +91,9 @@ export default function CountriesContainer({
         </div>
       ) : (
         <>
-          <CountriesList countries={current} />
+          <ErrorBoundary>
+            <CountriesList countries={current} />
+          </ErrorBoundary>
           <Pagination
             page={page}
             totalPages={totalPages}

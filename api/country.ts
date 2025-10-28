@@ -1,4 +1,4 @@
-import { Country } from "@/types";
+import { Country } from "@/types/country";
 
 export async function getCountryByCode(code: string): Promise<Country> {
   const res = await fetch(
@@ -7,7 +7,7 @@ export async function getCountryByCode(code: string): Promise<Country> {
     )}?fields=name,flags,region,subregion,capital,population,languages,currencies,capitalInfo,cca2,cca3,latlng`,
     { next: { revalidate: 120 } }
   );
-  if (!res.ok) throw new Error("Kunde inte hämta landet (code)");
+  if (!res.ok) throw new Error("Kunde inte hämta landet");
   const data = await res.json();
   return Array.isArray(data) ? data[0] : data;
 }
@@ -19,7 +19,7 @@ export async function getCountryByName(name: string): Promise<Country> {
     )}?fullText=true&fields=name,flags,region,subregion,capital,population,languages,currencies,capitalInfo,cca2,cca3,latlng`,
     { next: { revalidate: 120 } }
   );
-  if (!res.ok) throw new Error("Kunde inte hämta landet (name)");
+  if (!res.ok) throw new Error("Kunde inte hämta landet");
   const data = await res.json();
   return Array.isArray(data) ? data[0] : data;
 }

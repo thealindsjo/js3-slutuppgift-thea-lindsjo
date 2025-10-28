@@ -1,4 +1,4 @@
-import { WikiData } from "@/types";
+import { WikiData } from "@/types/wiki";
 
 export async function getWikiSummary(title: string): Promise<WikiData | null> {
   try {

@@ -1,4 +1,5 @@
-import { Country, WeatherData } from "@/types";
+import { Country } from "@/types/country";
+import { WeatherData } from "@/types/weather";
 
 export function getCoordsFromCountry(
   country: Country

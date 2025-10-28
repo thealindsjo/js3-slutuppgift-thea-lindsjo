@@ -11,7 +11,6 @@ export default function LoginAlert() {
   const [show, setShow] = useState(false);
 
   const loginRequired = searchParams.get("loginRequired");
-  const attemptedPath = searchParams.get("attempted");
 
   useEffect(() => {
     if (loginRequired === "true") {
@@ -21,7 +20,6 @@ export default function LoginAlert() {
 
   const handleClose = () => {
     setShow(false);
-    // Ta bort query params från URL
     const url = new URL(window.location.href);
     url.searchParams.delete("loginRequired");
     url.searchParams.delete("attempted");

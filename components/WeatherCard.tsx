@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { fetchWeatherByCoords, getCoordsFromCountry } from "@/api/weather";
-import { Spinner } from "./ui/spinner";
+import { Loading } from "./Loading";
 import { Button } from "./ui/button";
 import { Country } from "@/types/country";
 import { WeatherData } from "@/types/weather";
@@ -56,7 +56,7 @@ export default function WeatherCard({
     }
   }, [lat, lon, country]);
 
-  if (loading) return <Spinner />;
+  if (loading) return <Loading message="Hämtar väderdata..." size="sm" />;
 
   if (error)
     return (

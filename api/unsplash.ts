@@ -1,4 +1,4 @@
-import { UnsplashImage } from "@/types";
+import { UnsplashImage } from "@/types/unsplash";
 
 export async function getUnsplashImages(
   query: string,
@@ -6,6 +6,7 @@ export async function getUnsplashImages(
 ): Promise<UnsplashImage[]> {
   const key = process.env.UNSPLASH_KEY;
   if (!key) return [];
+
   try {
     const q = encodeURIComponent(query);
     const res = await fetch(
@@ -14,6 +15,7 @@ export async function getUnsplashImages(
     );
     if (!res.ok) return [];
     const json = await res.json();
+
     return (json.results || [])
       .slice(0, per_page)
       .map(
