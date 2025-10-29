@@ -20,6 +20,12 @@ const nextConfig = {
       },
     ],
   },
+  reactStrictMode: true,
+  env: {
+    AUTH_GOOGLE_ID: process.env.AUTH_GOOGLE_ID,
+    AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
+  },
+
 };
 
 module.exports = nextConfig;
